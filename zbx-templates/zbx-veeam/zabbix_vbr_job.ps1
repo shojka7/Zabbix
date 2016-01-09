@@ -94,6 +94,14 @@ switch ($ITEM) {
 	return "0"
     }
   }
+    "24hJobCount" {
+  $query = Get-VBRBackupSession | where { $_.EndTime -gt ((Get-Date).AddDays(-1)) } | Measure
+  if ($query) {
+    [string]$query.Count
+    } else {
+    return "0"
+    }
+  }
   default {
       Write-Host "-- ERROR -- : Need an option to work !"
   }
